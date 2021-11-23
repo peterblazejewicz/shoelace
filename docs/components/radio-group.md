@@ -50,29 +50,44 @@ const App = () => (
 );
 ```
 
-### Using the required attribute
+### Required
 
-Adding a `required` attribute to `sl-radio-group` will require at least one option to be selected.
+Add the `required` attribute to require a selection.
 
 ```html preview
-<sl-radio-group class="required-radio-group" label="Select an option" fieldset required>
-  <sl-radio value="1" name="foo">Option 1</sl-radio>
-  <sl-radio value="2" name="foo">Option 2</sl-radio>
-  <sl-radio value="3" name="foo">Option 3</sl-radio>
-</sl-radio-group>
-<br />
-<sl-button class="required-button">Validate Group</sl-button>
-<sl-button class="required-reset-button">Reset Group</sl-button>
+<div class="radio-group-required">
+  <sl-radio-group label="Select an option" fieldset required>
+    <sl-radio value="1">Option 1</sl-radio>
+    <sl-radio value="2">Option 2</sl-radio>
+    <sl-radio value="3">Option 3</sl-radio>
+  </sl-radio-group>
+  <br />
+  <sl-button data-validate>Validate</sl-button>
+  <sl-button data-reset>Reset</sl-button>
+</div>
 
 <script>
-  const button = document.querySelector('sl-button.required-button');
-  const resetButton = document.querySelector('sl-button.required-reset-button');
-  const group = document.querySelector('sl-radio-group.required-radio-group');
+  const container = document.querySelector('.radio-group-required');
+  const group = container.querySelector('sl-radio-group');
+  const validateButton = container.querySelector('[data-validate]');
+  const resetButton = container.querySelector('[data-reset]');
 
-  button.addEventListener('click', ()=> group.reportValidity());
-  resetButton.addEventListener('click', () => { group.value = ''})
+  validateButton.addEventListener('click', () => {
+    if (group.reportValidity()) {
+      alert('Valid');
+    }
+  });
+  resetButton.addEventListener('click', () => group.value = '');
 </script>
 ```
+
+### Form Submission
+
+TODO
+
+### Custom Validation Message
+
+TODO
 
 ```jsx react
 import { SlRadio, SlRadioGroup } from '@shoelace-style/shoelace/dist/react';
